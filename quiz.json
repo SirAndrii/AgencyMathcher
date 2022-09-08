@@ -1,0 +1,48 @@
+{
+  "quiz": [
+    {
+      "key" : "money",
+      "title" : "how much",
+      "type" : "select",
+      "multiple" : true,
+      "option" : {
+        "g": "text g",
+        "h": "text h",
+        "i": "text i"
+      }
+    },
+    {
+      "key" : "category",
+      "title" : "erste frage",
+      "type" : "check",
+      "multiple" : false,
+      "option" : {
+        "a": "text a",
+        "b": "text b",
+        "c": "text c"
+        }
+    },
+    {
+      "key" : "popular",
+      "title" : "zweite frage",
+      "type" : "check",
+      "multiple" : false,
+      "option" : {
+        "d": "text d",
+        "e": "text e",
+        "f": "text f"
+      }
+    },
+     {
+       "key" : "location",
+      "title" : "drite frage",
+      "type" : "check",
+      "multiple" : true,
+       "option" : {
+         "g": "text g",
+         "h": "text h",
+         "i": "text i"
+       }
+    }
+    ]
+}
