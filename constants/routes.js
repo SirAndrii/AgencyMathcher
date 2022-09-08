@@ -5,6 +5,8 @@ export const routes = {
     termOfUse: { label: 'termOfUse', route: '/termOfUse' },
     authPolicy: { label: 'authPolicy', route: '/401' },
     notFound: { label: 'notFound', route: '/404' },
+    QUIZ: {label:'quiz', route:'/quiz'},
+
 
     guestNavBar: {
         whatCanYouDo: { label: 'whatCanYouDo', route: '/#whatCanYouDo' },

@@ -3,19 +3,7 @@ import {Grid, Paper, Typography} from "@mui/material";
 import CustomLink from "../components/CustomLink";
 
 const style = {
-    home:
-        {
-            textAlign: "center",
-            backgroundColor: "#282c34",
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "calc(10px + 2vmin)",
-            scrollBehavior:'smooth',
-            color: "white",
-        },
+
     paper: {
         display: 'flex',
         flexDirection: 'column',
@@ -33,8 +21,8 @@ const style = {
 
 export default function Home() {
     return (
-        <div style={style.home}>
-            <Header/>
+
+
             <Grid container>
                 <Grid item>
                     <Typography variant="h1">HOME PAGE is here!</Typography>
@@ -83,6 +71,6 @@ export default function Home() {
                 </Grid>
 
             </Grid>
-        </div>
+
     );
 }

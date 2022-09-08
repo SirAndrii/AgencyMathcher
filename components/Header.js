@@ -16,7 +16,7 @@
 
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import NavBar from './NavBar'
+import NavBar from './layout/NavBar'
 // import { mainShadow } from '~/styles/app-theme/custom-shadows'
 
 const AppHeader = () => {

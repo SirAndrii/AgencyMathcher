@@ -11,10 +11,13 @@
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.4",
-    "@mui/material": "^5.10.4",
     "@mui/icons-material": "latest",
+    "@mui/material": "^5.10.4",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@emotion/cache": "^11.10.3"
   }
 }

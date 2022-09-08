@@ -1,24 +1,27 @@
-import {useState} from 'react'
-//import { useSelector } from 'react-redux'
 import Link from 'next/link'
-//import { routes, studentRoutes } from '~/constants/routes'
+import {useRouter} from "next/router";
+import {useState} from 'react'
 //import { useTranslation } from 'react-i18next'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 
-// import HashLink from '~/components/hash-link/HashLink'
-// import Logo from '~/containers/logo/Logo'
-// import Sidebar from '~/containers/sidebar/Sidebar'
-// import NavigationIcons from '~/containers/navigation-icons/NavigationIcons'
+
 
 import {Close, Menu} from '@mui/icons-material';
-import {routes} from '../constants/routes'
+
 import {Grid, Tooltip} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
 
+import {routes} from '../../constants/routes'
+
+
 
 const Navbar = () => {
+    const router = useRouter();
+    if (router.pathname === routes.QUIZ.route) return null;
+
+
     //const { t } = useTranslation()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [navItems, setNavItems] = useState(Object.values(routes.guestNavBar))
