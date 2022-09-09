@@ -1,14 +1,15 @@
-import React, {useState} from "react";
+import React, {useState,useRef} from "react";
 import {
     Checkbox,
     FormControl,
     FormControlLabel,
     FormGroup,
-    InputLabel, MenuItem,
+    InputLabel,
+    MenuItem,
     OutlinedInput,
+    Radio,
     RadioGroup,
-    Select,
-    Radio
+    Select
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
@@ -30,15 +31,35 @@ function FormWrapper(props) {
 };
 
 export default function useGenerator(data, props) {
+    const inputRef = useRef()
+    console.log({ref: inputRef.current})
 
-    const [components,] = useState(data.reduce((acc, item, index) => {
+    const defaultValue = (key,option) => {
+        const _filter = props.filter[key]
+
+        if (typeof _filter === "object" && !Array.isArray(_filter)) {
+
+            return _filter[option] === undefined ? false : _filter[option];
+        }
+        else {
+
+            return _filter || "";
+        }
+    }
+
+   // const [components,] = useState(data.reduce((acc, item) => {
+    const components= (data.reduce((acc, item) => {
             switch (item.type) {
                 case 'check':
                     switch (item.multiple) {
                         case false:
                             acc.push(
                                 <FormWrapper title={item.title}>
-                                    <RadioGroup onChange={props.handleChange(item.key)}>
+                                    <RadioGroup
+                                        ref={inputRef}
+                                        onChange={props.handleChange(item.key)}
+                                        defaultValue={defaultValue(item.key)}
+                                    >
                                         {Object.keys(item.option).map(key =>
                                             <FormControlLabel
                                                 control={<Radio/>}
@@ -54,13 +75,15 @@ export default function useGenerator(data, props) {
                         case true:
                             acc.push(
                                 <FormWrapper title={item.title}>
-                                    <FormGroup onChange={props.handleChange(item.key)}>
-                                        {Object.keys(item.option).map(key =>
+                                    <FormGroup onChange={props.handleChange(item.key)} ref={inputRef}>
+                                        {Object.keys(item.option).map(option =>
                                             <FormControlLabel
-                                                control={<Checkbox/>}
-                                                key={key}
-                                                value={key}
-                                                label={item.option[key]}/>
+                                                control={<Checkbox
+                                                    checked={defaultValue(item.key, option)}
+                                                />}
+                                                key={option}
+                                                value={option}
+                                                label={item.option[option]}/>
                                         )}
                                     </FormGroup>
                                 </FormWrapper>
@@ -74,9 +97,10 @@ export default function useGenerator(data, props) {
                         <FormWrapper title={item.title}>
                             <InputLabel>Select</InputLabel>
                             <Select
+                                ref={inputRef}
                                 onChange={props.handleChange(item.key)}
                                 multiple={item.multiple}
-                                value={item.multiple ? Object.keys(item.option) : ""}
+                                value={defaultValue(item.key)}
                                 input={<OutlinedInput label="Tag"/>}
                                 renderValue={(selected) => selected.join(', ')}
                                 // MenuProps={MenuProps}
@@ -99,7 +123,6 @@ export default function useGenerator(data, props) {
 
             return acc;
         }, [])
-
     );
 
     return components;

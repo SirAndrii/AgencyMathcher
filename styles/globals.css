@@ -4,3 +4,45 @@ body {
     margin: 0 auto;
     scrollBehavior: 'smooth',
 }
+
+
+.fadeBack-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+.fadeBack-enter-active {
+    opacity: 1;
+    transform: translateX(0%);
+}
+.fadeBack-exit  {
+    opacity: 1;
+    transform: translateX(0%);
+}
+.fadeBack-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.fade-enter {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+.fade-enter-active {
+    opacity: 1;
+    transform: translateX(0%);
+}
+.fade-exit  {
+    opacity: 1;
+    transform: translateX(0%);
+}
+.fade-exit-active {
+    opacity: 0;
+    transform: translateX(100%);
+}
+.fade-enter-active ,
+.fade-exit-active,
+.fadeBack-enter-active ,
+.fadeBack-exit-active {
+    transition: opacity 500ms, transform 500ms;
+}
+

@@ -3,7 +3,7 @@
     {
       "key": "industry",
       "title": "What industry are you in?",
-      "type": "select",
+      "type": "check",
       "multiple": true,
       "option": {
         "agriculture": "Agriculture",
