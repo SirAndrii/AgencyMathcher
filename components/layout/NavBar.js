@@ -6,21 +6,17 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 
 
-
 import {Close, Menu} from '@mui/icons-material';
 
-import {Grid, Tooltip} from "@mui/material";
+import {Grid} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
 
 import {routes} from '../../constants/routes'
-
+import CustomLink from "../CustomLink";
 
 
 const Navbar = () => {
-    const router = useRouter();
-    if (router.pathname === routes.QUIZ.route) return null;
-
 
     //const { t } = useTranslation()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -45,18 +41,16 @@ const Navbar = () => {
         <Grid
             container
             justifyContent={'space-between'}
-
+            alignItems={'center'}
             sx={{
-                padding: '0px',
+                padding: '0 20px',
                 margin: {xs: '0', xl: 'auto'},
-                maxWidth: 'xl',
-                width: {xl: '100%'}
+                //maxWidth: 'xl',
+                //width: {xl: '100%'}
             }}>
-            <Link href={'/'}>
-                <a>
-                    <img src={"https://innoloft.com/en/institutions/single/315321/aclippGmbH76653"} height={"40px"}/>
-                </a>
-            </Link>
+            <CustomLink href="/" type="link" style={{textDecoration: 'none', fontSize: "28px"}}>
+                aclipp
+            </CustomLink>
 
             <List sx={{
                 display: {xs: 'none', md: 'flex'},
@@ -65,21 +59,31 @@ const Navbar = () => {
                 {navList}
             </List>
 
+            <CustomLink
+                href="#"
+                type="button"
+                variant="contained"
+                sx={{
+                    display: {xs: 'none', md: 'block'}
+                }}>
+                Login
+            </CustomLink>
 
-                <IconButton onClick={ () => setIsSidebarOpen(true) }
-                            sx={ {
-                                display: { md: 'none' },
-                                backgroundColor:'red'}}
-                >
-                    <Menu color='primary' />
-                </IconButton>
+            <IconButton onClick={() => setIsSidebarOpen(true)}
+                        sx={{
+                            display: {md: 'none'},
+                            backgroundColor: 'red'
+                        }}
+            >
+                <Menu color='primary'/>
+            </IconButton>
 
             <Drawer anchor='right' onClose={() => setIsSidebarOpen(false)} open={isSidebarOpen}>
                 <IconButton onClick={() => setIsSidebarOpen(false)} sx={{
                     position: 'absolute',
                     right: '14px',
                     top: '14px',
-                    backgroundColor:'red'
+                    backgroundColor: 'red'
                 }}>
                     <Close color='primary'/>
                 </IconButton>

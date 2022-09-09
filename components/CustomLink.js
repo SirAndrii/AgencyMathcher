@@ -12,7 +12,7 @@ export default function CustomLink({ type, href, children, ...props }) {
     } else if (type === "button") {
         return (
             <NextLink href={href} passHref>
-                <MuiButton {...props}>{children}</MuiButton>
+                <MuiButton {...props} color={"primary"} >{children}</MuiButton>
             </NextLink>
         );
     }

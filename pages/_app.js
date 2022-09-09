@@ -1,6 +1,6 @@
 import Layout from "../components/layout/Layout";
 import Header from "../components/Header";
-//todo import "../styles/globals.css";
+import "../styles/globals.css";
 import {ThemeProvider} from "@mui/material";
 import lightTheme from "../styles/theme/lightTheme";
 

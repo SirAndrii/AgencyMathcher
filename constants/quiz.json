@@ -1,48 +1,70 @@
 {
   "quiz": [
     {
-      "key" : "money",
-      "title" : "how much",
-      "type" : "select",
-      "multiple" : true,
-      "option" : {
-        "g": "text g",
-        "h": "text h",
-        "i": "text i"
+      "key": "industry",
+      "title": "What industry are you in?",
+      "type": "select",
+      "multiple": true,
+      "option": {
+        "agriculture": "Agriculture",
+        "construction": "Construction",
+        "material": "Chemicals & Raw Materials",
+        "service": "Services & Crafts"
       }
     },
     {
-      "key" : "category",
-      "title" : "erste frage",
-      "type" : "check",
-      "multiple" : false,
-      "option" : {
-        "a": "text a",
-        "b": "text b",
-        "c": "text c"
-        }
-    },
-    {
-      "key" : "popular",
-      "title" : "zweite frage",
-      "type" : "check",
-      "multiple" : false,
-      "option" : {
-        "d": "text d",
-        "e": "text e",
-        "f": "text f"
+      "key": "category",
+      "title": "Which category does your customer group belong to?",
+      "type": "check",
+      "multiple": true,
+      "option": {
+        "b2b": "B2B",
+        "b2c": "B2C"
       }
     },
-     {
-       "key" : "location",
-      "title" : "drite frage",
-      "type" : "check",
-      "multiple" : true,
-       "option" : {
-         "g": "text g",
-         "h": "text h",
-         "i": "text i"
-       }
+    {
+      "key": "popular",
+      "title": "Do you already know which services are relevant for you?",
+      "type": "check",
+      "multiple": true,
+      "option": {
+        "consulting": "strategic consulting",
+        "influencer": "influencer relations",
+        "podcast": "corporate podcast"
+      }
+    },
+    {
+      "key": "budget",
+      "title": "What is your (planned) monthly budget for PR?",
+      "type": "check",
+      "multiple": false,
+      "option": {
+        "0": "up to 1000€",
+        "1000": "up to 5000€",
+        "5000": "up to 10000€",
+        "10000": "more than 10000€"
+      }
+    },
+    {
+      "key": "location",
+      "title": "What is the geography of your target market?",
+      "type": "check",
+      "multiple": false,
+      "option": {
+        "regional": "regional",
+        "national": "national",
+        "international": "international"
+      }
+    },
+    {
+      "key": "budget",
+      "title": "How active do you want your new agency to be for you?",
+      "type": "check",
+      "multiple": true,
+      "option": {
+        "short": "Supervision of a project",
+        "long": "Long-term cooperation"
+      }
     }
-    ]
+  ]
 }

@@ -6,7 +6,7 @@ import createEmotionCache from '../styles/theme/createEmotionCache';
 export default class MyDocument extends Document {
     render() {
         return (
-            <Html lang="en">
+            <Html lang="en" style={{scrollBehavior:'smooth'}}>
                 <Head>
                     {this.props.emotionStyleTags}
                 </Head>
@@ -18,6 +18,8 @@ export default class MyDocument extends Document {
         );
     }
 }
+
+
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).

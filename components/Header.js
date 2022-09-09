@@ -17,9 +17,14 @@
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import NavBar from './layout/NavBar'
+import {useRouter} from "next/router";
+import {routes} from "../constants/routes";
 // import { mainShadow } from '~/styles/app-theme/custom-shadows'
 
 const AppHeader = () => {
+    const router = useRouter();
+    if (router.pathname === routes.QUIZ.route) return null;
+
   return (
       <>
         <AppBar color='common' /*sx={ { boxShadow: mainShadow } }*/>

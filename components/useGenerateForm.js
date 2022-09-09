@@ -4,23 +4,41 @@ import {
     FormControl,
     FormControlLabel,
     FormGroup,
-    FormLabel,
-    InputLabel, MenuItem, OutlinedInput,
-    Radio,
-    RadioGroup, Select
+    InputLabel, MenuItem,
+    OutlinedInput,
+    RadioGroup,
+    Select,
+    Radio
 } from "@mui/material";
+import Typography from "@mui/material/Typography";
+
+
+const styles = {
+    maxWidth: 800,
+    minWidth: 320,
+}
+
+function FormWrapper(props) {
+    return (
+        <>
+            <Typography variant={"h1"}>{props.title}</Typography>
+            <FormControl sx={styles}>
+                {props.children}
+            </FormControl>
+        </>
+    )
+};
 
 export default function useGenerator(data, props) {
 
-    const [components,] = useState(data.reduce((acc, item) => {
+    const [components,] = useState(data.reduce((acc, item, index) => {
             switch (item.type) {
                 case 'check':
                     switch (item.multiple) {
                         case false:
                             acc.push(
-                                <FormControl onChange={props.handleChange(item.key)}>
-                                    <FormLabel>{item.title}</FormLabel>
-                                    <RadioGroup>
+                                <FormWrapper title={item.title}>
+                                    <RadioGroup onChange={props.handleChange(item.key)}>
                                         {Object.keys(item.option).map(key =>
                                             <FormControlLabel
                                                 control={<Radio/>}
@@ -29,15 +47,14 @@ export default function useGenerator(data, props) {
                                                 label={item.option[key]}/>
                                         )}
                                     </RadioGroup>
-                                </FormControl>
+                                </FormWrapper>
                             )
                             break;
 
                         case true:
                             acc.push(
-                                <FormControl onChange={props.handleChange(item.key)}>
-                                    <FormLabel>{item.title}</FormLabel>
-                                    <FormGroup>
+                                <FormWrapper title={item.title}>
+                                    <FormGroup onChange={props.handleChange(item.key)}>
                                         {Object.keys(item.option).map(key =>
                                             <FormControlLabel
                                                 control={<Checkbox/>}
@@ -46,7 +63,7 @@ export default function useGenerator(data, props) {
                                                 label={item.option[key]}/>
                                         )}
                                     </FormGroup>
-                                </FormControl>
+                                </FormWrapper>
                             )
                             break;
                     }
@@ -54,13 +71,12 @@ export default function useGenerator(data, props) {
 
                 case 'select':
                     acc.push(
-                        <FormControl>
-                            <FormLabel>{item.title}</FormLabel>
+                        <FormWrapper title={item.title}>
                             <InputLabel>Select</InputLabel>
                             <Select
                                 onChange={props.handleChange(item.key)}
                                 multiple={item.multiple}
-                                value={Object.keys(item.option)}
+                                value={item.multiple ? Object.keys(item.option) : ""}
                                 input={<OutlinedInput label="Tag"/>}
                                 renderValue={(selected) => selected.join(', ')}
                                 // MenuProps={MenuProps}
@@ -74,12 +90,16 @@ export default function useGenerator(data, props) {
                                     </MenuItem>
                                 )}
                             </Select>
-                        </FormControl>
+                        </FormWrapper>
                     )
                     break;
             }
+
+            //wrap components on last step
+
             return acc;
         }, [])
+
     );
 
     return components;

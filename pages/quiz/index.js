@@ -64,17 +64,36 @@ export default function Quiz() {
 
     return (
         <Grid
-            container
-            direction={'column'}>
-            <Header/>
+        container
+        >
+            <Grid item xs={12}>
+                <LinearProgress
+                    // className={classes.bar}
+                    variant="determinate"
+                    value={(activeTab + 1) * 100 / tabs.length}/>
+            </Grid>
 
-            <Typography variant={"h3"}>
-                {data.quiz[1].title}
-            </Typography>
+
+
+        <Grid
+            container
+            direction={'column'}
+            alignItems={"center"}
+            justifyContent={'center'}
+            rowGap={4}
+            sx={{
+                minHeight: 'calc(100vh - 10px)'
+            }}
+        >
 
             {tabs[activeTab]}
 
-            <Grid container direction={"row"}>
+            <Grid
+                container
+                direction={"row"}
+                justifyContent={"center"}
+                gap={2}
+            >
                 <Button
                     variant='outlined'
                     color='primary'
@@ -94,6 +113,7 @@ export default function Quiz() {
                     {activeTab !== (tabs.length - 1) ? 'next' : 'finish'}
                 </Button>
             </Grid>
+        </Grid>
         </Grid>
     )
 }
