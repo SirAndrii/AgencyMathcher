@@ -5,8 +5,6 @@ import {Button, Grid, LinearProgress} from "@mui/material";
 import {CSSTransition, SwitchTransition} from "react-transition-group";
 import {useRouter} from "next/router";
 
-
-
 export default function Quiz() {
     const [activeTab, setActiveTab] = useState(0);
     const [filter, setFilter] = useState({})
@@ -36,14 +34,6 @@ console.log({filter})
                 query: { filter: JSON.stringify(filter)}
             }, '/matched')
 
-//there are few options how to send state to agency matcher:
-            //1. if state can be passed with query, then arrays should be transformed to [value]=1
-            // 2. Use Redux
-            // 3. show it on the same page
-
-            //agency update - make fetch to firebase after preview page. here we need redux
-
-            //so it's better to use redux i suppose
         } else {
             setActiveTab(activeTab + 1)
         }
@@ -66,8 +56,6 @@ console.log({filter})
                 [key]: isCheckbox ? {...prev[key], [value]: checked} : value
             })
         )
-
-
     }
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import Header from "../components/Header";
+import Header from "../components/layout/Header";
 import "../styles/globals.css";
 import {ThemeProvider} from "@mui/material";
 import lightTheme from "../styles/theme/lightTheme";

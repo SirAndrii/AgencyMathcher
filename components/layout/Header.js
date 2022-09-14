@@ -1,25 +1,9 @@
-// import { useRouter } from 'next/router'
-// import {Grid} from "@mui/material";
-//
-// export default function Header() {
-//   return (
-//     <Grid
-//     container
-//     direction={"row"}
-//     >
-//       <Link href="/">Home</Link>
-//       <Link href="/about">About</Link>
-//         <Link href="/quiz">Quiz</Link>
-//     </Grid>
-//   )
-// }
-
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import NavBar from './layout/NavBar'
 import {useRouter} from "next/router";
-import {routes} from "../constants/routes";
-// import { mainShadow } from '~/styles/app-theme/custom-shadows'
+
+import {AppBar, Toolbar} from '@mui/material'
+import NavBar from './NavBar'
+
+import {routes} from "../../constants/routes";
 
 const AppHeader = () => {
     const router = useRouter();
@@ -27,7 +11,7 @@ const AppHeader = () => {
 
   return (
       <>
-        <AppBar color='common' /*sx={ { boxShadow: mainShadow } }*/>
+        <AppBar color='common'>
           <NavBar />
         </AppBar>
         <Toolbar sx={ { height: { xs: '56px', sm: '72px', md: '80px' } } } />

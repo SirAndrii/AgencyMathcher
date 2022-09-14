@@ -90,26 +90,31 @@ export default function useGenerator(data, props) {
                     break;
 
                 case 'select':
-                    const selectValue =  defaultValue(item.key) || ( item.multiple ? [] : "" );
+                    const {key, multiple, title, option} = item
+                    const selectValue =  defaultValue(key) || (multiple ? [] : "" );
+
+                    const optionArr = Object.keys(option);
 
                     acc.push(
-                        <FormWrapper title={item.title}>
+                        <FormWrapper title={title}>
                             <InputLabel>Select</InputLabel>
                             <Select
                                 ref={inputRef}
-                                onChange={props.handleChange(item.key)}
-                                multiple={item.multiple}
+                                onChange={props.handleChange(key)}
+                                multiple={multiple}
                                 value={ selectValue }
                                 input={<OutlinedInput label="Tag"/>}
-                                renderValue={(selected) =>  item.multiple? selected.join(', ') : selected}
+                                renderValue={(selected) =>  multiple ? selected.join(', ') : selected}
                                 // MenuProps={MenuProps}
                             >
-                                {Object.keys(item.option).map(key =>
+                                {optionArr.map( opt =>
                                     <MenuItem
-                                        key={key}
-                                        value={key}
+                                        key={opt}
+                                        value={opt}
                                     >
-                                        {item.option[key]}
+                                        { multiple && <Checkbox checked={selectValue.includes( opt )} />}
+
+                                        {option[opt]}
                                     </MenuItem>
                                 )}
                             </Select>
