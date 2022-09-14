@@ -1,24 +1,17 @@
-import {Box} from "@mui/material";
+import {Grid} from "@mui/material";
 
-
-const style = {
-    home:
-        {
-            textAlign: "center",
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-        }
-}
-
-export default function Layout (props) {
+export default function Layout(props) {
 
     return (
-        <Box style={style.home}>
+        <Grid container
+              direction={'column'}
+              justifyContent={'center'}
+              alignItems={'center'}
+              sx={{
+                  textAlign: "center",
+                  minHeight: "100vh",
+              }}>
             {props.children}
-        </Box>
-
+        </Grid>
     );
 }

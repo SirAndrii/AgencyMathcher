@@ -1,6 +1,6 @@
 import {Grid, Paper} from "@mui/material";
 import {agency} from "../../constants/dummyData";
-import db from "../../firebaseAdmin";
+import db from "../../firebaseAdmin"
 
 export default function AllAgencies(props) {
 
@@ -11,12 +11,11 @@ export default function AllAgencies(props) {
         >
             {props.agency.map(el =>
                 <Grid
-                    key={agency.path}
                     container
                     direction={"column"}
                     gap={10}
                 >
-                    <Grid item>
+                    <Grid item >
                         <Paper elevation={4}>
                             <pre>
                             {JSON.stringify(el, null, 2)}
@@ -31,8 +30,14 @@ export default function AllAgencies(props) {
 
 
 export async function getStaticProps() {
-    const data = await db.collection('agency').get();
-    const agency = data.docs.map(doc => doc.data());
+
+
+    const observer = await db.collection('agency').onSnapshot(docSnapshot => {
+        console.log(`Received doc snapshot: ${docSnapshot}`);
+        docSnapshot.docChanges()
+    }, err => {
+        console.log(`Encountered error: ${err}`);
+    });
 
     return {
         props: {

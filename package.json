@@ -11,14 +11,15 @@
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.4",
+    "@emotion/cache": "^11.10.3",
     "@mui/icons-material": "latest",
     "@mui/material": "^5.10.4",
+    "axios": "^0.27.2",
+    "firebase": "^9.9.4",
+    "firebase-admin": "^11.0.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-transition-group": "^4.4.5"
-  },
-  "devDependencies": {
-    "@emotion/cache": "^11.10.3"
   }
 }

@@ -32,18 +32,15 @@ function FormWrapper(props) {
 
 export default function useGenerator(data, props) {
     const inputRef = useRef()
-    console.log({ref: inputRef.current})
 
     const defaultValue = (key,option) => {
         const _filter = props.filter[key]
 
         if (typeof _filter === "object" && !Array.isArray(_filter)) {
-
             return _filter[option] === undefined ? false : _filter[option];
         }
         else {
-
-            return _filter || "";
+            return _filter;
         }
     }
 
@@ -58,7 +55,7 @@ export default function useGenerator(data, props) {
                                     <RadioGroup
                                         ref={inputRef}
                                         onChange={props.handleChange(item.key)}
-                                        defaultValue={defaultValue(item.key)}
+                                        value={defaultValue(item.key) || false}
                                     >
                                         {Object.keys(item.option).map(key =>
                                             <FormControlLabel
@@ -79,7 +76,7 @@ export default function useGenerator(data, props) {
                                         {Object.keys(item.option).map(option =>
                                             <FormControlLabel
                                                 control={<Checkbox
-                                                    checked={defaultValue(item.key, option)}
+                                                    checked={defaultValue(item.key, option) || false}
                                                 />}
                                                 key={option}
                                                 value={option}
@@ -93,6 +90,8 @@ export default function useGenerator(data, props) {
                     break;
 
                 case 'select':
+                    const selectValue =  defaultValue(item.key) || ( item.multiple ? [] : "" );
+
                     acc.push(
                         <FormWrapper title={item.title}>
                             <InputLabel>Select</InputLabel>
@@ -100,9 +99,9 @@ export default function useGenerator(data, props) {
                                 ref={inputRef}
                                 onChange={props.handleChange(item.key)}
                                 multiple={item.multiple}
-                                value={defaultValue(item.key)}
+                                value={ selectValue }
                                 input={<OutlinedInput label="Tag"/>}
-                                renderValue={(selected) => selected.join(', ')}
+                                renderValue={(selected) =>  item.multiple? selected.join(', ') : selected}
                                 // MenuProps={MenuProps}
                             >
                                 {Object.keys(item.option).map(key =>
@@ -118,8 +117,6 @@ export default function useGenerator(data, props) {
                     )
                     break;
             }
-
-            //wrap components on last step
 
             return acc;
         }, [])

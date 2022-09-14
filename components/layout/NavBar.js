@@ -1,7 +1,4 @@
-import Link from 'next/link'
-import {useRouter} from "next/router";
 import {useState} from 'react'
-//import { useTranslation } from 'react-i18next'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 
@@ -18,7 +15,6 @@ import CustomLink from "../CustomLink";
 
 const Navbar = () => {
 
-    //const { t } = useTranslation()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [navItems, setNavItems] = useState(Object.values(routes.guestNavBar))
 
@@ -28,11 +24,12 @@ const Navbar = () => {
             if (userRole === 'agency') setNavItems(Object.values(routes.agencyNavBar))
         }, [userRole])
     */
+
     const navList = navItems.map((item) =>
-        <ListItem>
-            <Link key={item.label} href={item.route} scroll={false}>
-                <a>{item.label} {/*todo should be translate*/}</a>
-            </Link>
+        <ListItem key={item.label}>
+            <CustomLink type={'link'} href={item.route} scroll={false}>
+                {item.label} {/*todo should be translate*/}
+            </CustomLink>
         </ListItem>
     );
 
@@ -45,9 +42,8 @@ const Navbar = () => {
             sx={{
                 padding: '0 20px',
                 margin: {xs: '0', xl: 'auto'},
-                //maxWidth: 'xl',
-                //width: {xl: '100%'}
-            }}>
+            }}
+        >
             <CustomLink href="/" type="link" style={{textDecoration: 'none', fontSize: "28px"}}>
                 aclipp
             </CustomLink>

@@ -3,39 +3,43 @@ import data from '../../constants/quiz.json'
 import useGenerator from "../../components/useGenerateForm";
 import {Button, Grid, LinearProgress} from "@mui/material";
 import {CSSTransition, SwitchTransition} from "react-transition-group";
-import usePrev from "../../components/usePrev";
+import {useRouter} from "next/router";
 
-//onsubmit, onclick, onchange useref for inputs
+
+
 export default function Quiz() {
     const [activeTab, setActiveTab] = useState(0);
     const [filter, setFilter] = useState({})
     const [valid, setValid] = useState(false)
-    const ref = useRef(null);
+    const ref = useRef(true); //for sliding direction
+    const router = useRouter();
 
-
-    const handleClick = () => {
-        ref.current =  activeTab;
+    console.log({filter})
+    const handleClickNext = () => {
+        ref.current = true;
 
         if (activeTab === tabs.length - 1) {
-
             //change boolean objects to arrays. multiselect returns array, checked - object
             for (const key in filter) {
                 if (!Array.isArray(filter[key]) && typeof filter[key] === 'object') {
                     filter[key] = Object.keys(filter[key]).filter(property => filter[key][property]);
-
-                    //if array contains only one element convert it to string
-                    if (filter[key].length === 1) {
-                        filter[key] = filter[key][0];
-                    }
+                }
+                //if array contains only one element convert it to string (because multi select returns string in case of one selection)
+                if (filter[key].length === 1) {
+                    alert(filter[key])
+                    filter[key] = filter[key][0];
                 }
             }
+console.log({filter})
+            router.push({
+                pathname: '/matched',
+                query: { filter: JSON.stringify(filter)}
+            }, '/matched')
 
-            console.log(filter)
 //there are few options how to send state to agency matcher:
             //1. if state can be passed with query, then arrays should be transformed to [value]=1
             // 2. Use Redux
             // 3. show it on the same page
-
 
             //agency update - make fetch to firebase after preview page. here we need redux
 
@@ -45,6 +49,13 @@ export default function Quiz() {
         }
     }
 
+    const handleClickPrev = () =>{
+        if (activeTab !== 0) {
+            ref.current = false;
+
+            setActiveTab(prev => prev - 1);
+        }
+    }
 
     const handleChange = (key) => (event) => {
         const {value, type, checked} = event.target;
@@ -60,16 +71,13 @@ export default function Quiz() {
     }
 
     useEffect(() => {
-
         //I can't do it in handlechange, because filter usestate async, here i don't have access to current 'key'.
         //Solve - use iterate filter object by current tab or save key in state.
         const currentFilter = Object.values(filter)[activeTab]
-        console.log(currentFilter)
-        if (currentFilter) {
 
+        if (currentFilter) {
             setValid(prev => {
                 const validated = validation(currentFilter)
-                console.log(validated)
                 // if (prev !== validated)
                 return validated;
             });
@@ -95,7 +103,7 @@ export default function Quiz() {
                 <CSSTransition
                     key={activeTab}
                     addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
-                    classNames={activeTab > ref.current  || ref.current==null ? 'fade' : 'fadeBack'}
+                    classNames={ ref.current ? 'right': 'left'}
                 >
                     <Grid
                         container
@@ -119,9 +127,7 @@ export default function Quiz() {
                             <Button
                                 variant='outlined'
                                 color='primary'
-                                onClick={(activeTab !== 0) ? () => {
-                                    setActiveTab(activeTab - 1)
-                                } : null}
+                                onClick={(e) => handleClickPrev(activeTab,e)}
                             >
                                 {activeTab === 0 ? 'cancel' : 'previous'}
                             </Button>
@@ -130,7 +136,7 @@ export default function Quiz() {
                                 variant='contained'
                                 color='secondary'
                                 disabled={!valid}
-                                onClick={() => handleClick(activeTab)}
+                                onClick={(e) => handleClickNext(activeTab,e)}
                             >
                                 {activeTab !== (tabs.length - 1) ? 'next' : 'finish'}
                             </Button>

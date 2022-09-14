@@ -1,44 +1,53 @@
 import Typography from "@mui/material/Typography";
-import {useRouter} from 'next/router'
-import {useEffect} from "react";
 import {agency} from '../../constants/dummyData'
+import {Paper} from "@mui/material";
 
-export default function AgencyInfo () {
-    const router = useRouter();
+export default function AgencyInfo({agencyData}) {
 
-    const {agencyId} = router.query;
-    /*
-    //we DON't need it with StaticProps
-useEffect(()=>{
-    //todo find agencyId on cached server if not - show 404 error
-    //look for id in DataBase with fetch or firebase connection
-
-
-},[])
-*/
 
     return (
-
-        <Typography variant={'h1'}>This is agency: {agencyId} </Typography>
-
+        <Paper>
+            <Typography variant={'h1'}>This is agency: {agencyData.name} </Typography>
+            <Typography subtitle={2}>
+                {JSON.stringify(agencyData, null, 2)}
+            </Typography>
+        </Paper>
     )
 }
 
 //fetch data for prerender (Static Generation) or SSR.
 
 //it will look firstly for this function then for component
-export async function getStaticProps(context){
-    console.log({context})
+export async function getStaticProps(context) {
+    const agencyUrl = context.params.agencyId
+
     //req, res
     //here we can fetch data from firebase (API)
 
+    const agencyData = agency.find(item => item.path === agencyUrl)
+
     //we need to return object with props
     return {
-        props:{
-            //
+        props: {
+            agencyData
         },
         //revalidate: 60 // revalidate if there are requests
     };
+}
+
+export async function getStaticPaths() {
+    const urlArr = agency.map(item => item.path)
+        .map(path => (
+            {
+                params: {
+                    agencyId: path
+                }
+            }))
+
+    return {
+        paths: urlArr,
+        fallback: false
+    }
 }
 
 /* dynamically for every incoming reques

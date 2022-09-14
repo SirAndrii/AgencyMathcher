@@ -3,7 +3,7 @@
     {
       "key": "industry",
       "title": "What industry are you in?",
-      "type": "check",
+      "type": "select",
       "multiple": true,
       "option": {
         "agriculture": "Agriculture",
@@ -22,18 +22,18 @@
         "b2c": "B2C"
       }
     },
-    {
+    {"active": false,
       "key": "popular",
       "title": "Do you already know which services are relevant for you?",
-      "type": "check",
-      "multiple": true,
+      "type": "select",
+      "multiple": false,
       "option": {
         "consulting": "strategic consulting",
         "influencer": "influencer relations",
         "podcast": "corporate podcast"
       }
     },
-    {
+    {"active": false,
       "key": "budget",
       "title": "What is your (planned) monthly budget for PR?",
       "type": "check",
@@ -56,8 +56,8 @@
         "international": "international"
       }
     },
-    {
-      "key": "budget",
+    {"active": false,
+      "key": "term",
       "title": "How active do you want your new agency to be for you?",
       "type": "check",
       "multiple": true,
