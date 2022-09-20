@@ -9,14 +9,22 @@ export const routes = {
 
 
     guestNavBar: {
-        whatCanYouDo: { label: 'whatCanYouDo', route: '/#whatCanYouDo' },
-        howItWorks: { label: 'howItWorks', route: '/#howItWorks' },
-        whoWeAre: { label: 'whoWeAre', route: '/#whoWeAre' }
+        whatCanYouDo: { label: 'What can you do', route: '/#whatCanYouDo' }, //later label can be used for translation
+        howItWorks: { label: 'How it works', route: '/#howItWorks' },
+        whoWeAre: { label: 'Who we are', route: '/#whoWeAre' }
     },
     agencyNavBar: {
         editProfile: { label: 'editProfile', route: '/add-edit' },
         whoWeAre: { label: 'whoWeAre', route: '/#whoWeAre' },
         howItWorks: { label: 'howItWorks', route: '/#howItWorks' },
         faq: { label: 'faq', route: '/#faq' },
+    },
+
+    footerNavBar:{
+        impressum:{ label: 'Impressum', route: 'https://aclipp.com/impressum' },
+        datenschutz:{ label: 'Datenschutzerklärung', route: 'https://aclipp.com/datenschutz' },
+        agbs:{ label: 'AGBs', route: 'https://aclipp.com/add-edit' },
+
     }
 }
+

@@ -3,55 +3,49 @@ import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
 import AppRegistrationTwoToneIcon from '@mui/icons-material/AppRegistrationTwoTone';
 import ContactPhoneTwoToneIcon from '@mui/icons-material/ContactPhoneTwoTone';
 import VerifiedUserTwoToneIcon from '@mui/icons-material/VerifiedUserTwoTone';
-import howItWorksMentorFourth from '~/assets/img/guest-home-page/howItWorksMentorFourth.svg'
-
-import howItWorksStudentFirst from '~/assets/img/guest-home-page/howItWorksStudentFirst.svg'
-import howItWorksStudentSecond from '~/assets/img/guest-home-page/howItWorksStudentSecond.svg'
-import howItWorksStudentThird from '~/assets/img/guest-home-page/howItWorksStudentThird.svg'
-import howItWorksStudentFourth from '~/assets/img/guest-home-page/howItWorksStudentFourth.svg'
 
 export const userCardArray = [
     {
-        icon: QuizTwoToneIcon,
+        icon: <QuizTwoToneIcon/>,
         title: 'Your goals',
         description: 'Choose your criteria for agency'
     },
     {
-        icon: AppRegistrationTwoToneIcon,
+        icon: <AppRegistrationTwoToneIcon />,
         title: 'Sign in',
-        description: 'Tell us who you are'
+        description: 'Tell us who you are. Tell us who you are. Tell us who you are. '
     },
     {
-        icon: StarTwoToneIcon,
+        icon: <StarTwoToneIcon />,
         title: 'Get best agencies',
         description: 'Our algorithm will find 3 best PR agencies that perfectly fit you'
     },
     {
-        icon: ContactPhoneTwoToneIcon,
+        icon: <ContactPhoneTwoToneIcon />,
         title: 'Contact',
-        description: 'Send request with your case to agency'
+        description: 'Send request with your case to agency.Tell us who you are. Tell us who you are. Tell us who you are. '
     }
 ]
 
 export const agencyCardArray = [
     {
-        icon: AppRegistrationTwoToneIcon,
+        icon: <AppRegistrationTwoToneIcon />,
         title: 'Register your agency',
-        description: 'Tell us who you are'
+        description: 'Create an account on our platform.Tell us who you are. Tell us who you are. Tell us who you are. Tell us who you are. Tell us who you are. '
     },
     {
-        icon:  VerifiedUserTwoToneIcon,
+        icon: <QuizTwoToneIcon />,
+        title: 'Your profile',
+        description: 'Choose your criteria for client'
+    },
+    {
+        icon:  <VerifiedUserTwoToneIcon />,
         title: 'Get it verified',
         description: 'We will you contact tou for verify your Data'
     },
     {
-        icon: howItWorksStudentThird,
-        title: 'guestHomePage.howItWorks.student.sendRequest.title',
-        description: 'guestHomePage.howItWorks.student.sendRequest.description'
-    },
-    {
-        icon: howItWorksStudentFourth,
-        title: 'guestHomePage.howItWorks.student.startLearning.title',
-        description: 'guestHomePage.howItWorks.student.startLearning.description'
+        icon: <ContactPhoneTwoToneIcon />,
+        title: 'Get contacts',
+        description: 'Get leads from clients that fits your profile the best!'
     }
 ]
