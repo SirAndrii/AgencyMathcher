@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import data from '../../constants/quiz.json'
+import dataJson from '../../constants/quiz.json'
 import useGenerator from "../../components/useGenerateForm";
 import {Button, Grid, LinearProgress} from "@mui/material";
 import {CSSTransition, SwitchTransition} from "react-transition-group";
@@ -28,11 +28,12 @@ export default function Quiz() {
                     filter[key] = filter[key][0];
                 }
             }
-console.log({filter})
+            console.log({filter})
             router.push({
                 pathname: '/matched',
-                query: { filter: JSON.stringify(filter)}
-            }, '/matched')
+                query: {filter: JSON.stringify(filter)}
+          //  }, '/matched')
+        })
 
         } else {
             setActiveTab(activeTab + 1)
@@ -75,7 +76,7 @@ console.log({filter})
     }, [filter, activeTab])
 
 
-    const tabs = useGenerator(data.quiz, {handleChange, filter})
+    const tabs = useGenerator(dataJson, {handleChange, filter})
 
     return (
         <Grid
@@ -115,6 +116,11 @@ console.log({filter})
                             <Button
                                 variant='outlined'
                                 color='primary'
+                                sx={{
+                                    padding: '10px 20px',
+                                    width: '100px',
+                                    borderRadius: '50px',
+                                }}
                                 onClick={(e) => handleClickPrev(activeTab,e)}
                             >
                                 {activeTab === 0 ? 'cancel' : 'previous'}
@@ -124,6 +130,10 @@ console.log({filter})
                                 variant='contained'
                                 color='secondary'
                                 disabled={!valid}
+                                sx={{
+                                    padding: '10px 20px',
+                                    width: '100px',
+                                }}
                                 onClick={(e) => handleClickNext(activeTab,e)}
                             >
                                 {activeTab !== (tabs.length - 1) ? 'next' : 'finish'}

@@ -4,6 +4,7 @@ import KeyboardDoubleArrowDownTwoToneIcon from '@mui/icons-material/KeyboardDoub
 import CustomLink from "../CustomLink";
 import {maxWidth} from "../../styles/theme/aclippTheme";
 import {transition} from "../../styles/transition";
+import DotsIcon from "../icon/DotsIcon";
 
 
 const CardsWithButton = ({array, isAgency}) => {
@@ -66,7 +67,7 @@ const CardsWithButton = ({array, isAgency}) => {
                                     <Box
                                         sx={{
                                             borderRadius: '50%',
-                                            background: 'orange',
+                                            background: '#e61f5c59',
                                             p: '10px'
                                         }}>
                                         <Box
@@ -89,16 +90,17 @@ const CardsWithButton = ({array, isAgency}) => {
                                         alignItems={"center"}
                                         className={'arrow'}
                                     >
-                                        <KeyboardDoubleArrowDownTwoToneIcon
-                                            sx={{
-                                                pt: '10px',
-                                            }}
-                                        />
-                                        <KeyboardDoubleArrowDownTwoToneIcon
-                                            sx={{
-                                                pb: '10px',
-                                            }}
-                                        />
+                                        <DotsIcon />
+                                        {/*<KeyboardDoubleArrowDownTwoToneIcon*/}
+                                        {/*    sx={{*/}
+                                        {/*        pt: '10px',*/}
+                                        {/*    }}*/}
+                                        {/*/>*/}
+                                        {/*<KeyboardDoubleArrowDownTwoToneIcon*/}
+                                        {/*    sx={{*/}
+                                        {/*        pb: '10px',*/}
+                                        {/*    }}*/}
+                                        {/*/>*/}
                                     </Stack>
 
                                 </Stack>
@@ -144,7 +146,7 @@ const CardsWithButton = ({array, isAgency}) => {
               direction='column'
               alignItems='center'
               sx={{
-                  '&> .MuiBox-root:nth-of-type(4) .arrow': {
+                  '&> .MuiBox-root:last .arrow': {
                       display: {xs: 'none', md: 'block'}
                   }
               }}

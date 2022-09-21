@@ -12,8 +12,8 @@ export default function Wellcome () {
               sx={{
                   pt: '70px',
                   //mt: {sx: '40px', md: '50px'},
-                  minHeight: '90vh',
-                  backgroundImage: 'radial-gradient(ellipse at top, rgba(230, 31, 92, 0.1), transparent 80%)'
+                  minHeight: '100vh',
+                  //backgroundImage: 'radial-gradient(ellipse at top, rgba(230, 31, 92, 0.1), transparent 80%)'
               }}>
             <Grid item>
                 <Typography variant={'hero'} component={'h1'}

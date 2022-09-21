@@ -45,6 +45,7 @@ export default function useGenerator(data, props) {
     }
 
    // const [components,] = useState(data.reduce((acc, item) => {
+    //todo create separate components
     const components= (data.reduce((acc, item) => {
             switch (item.type) {
                 case 'check':

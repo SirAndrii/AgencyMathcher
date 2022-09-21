@@ -1,5 +1,4 @@
-{
-  "quiz": [
+[
     {
       "key": "industry",
       "title": "What industry are you in?",
@@ -67,4 +66,3 @@
       }
     }
   ]
-}

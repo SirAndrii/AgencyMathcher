@@ -3,6 +3,7 @@ body {
     background-color: #EFF0F6;
     padding: 0;
     margin: 0 auto;
+    min-height: 100vh;
 }
 
 .right-enter {

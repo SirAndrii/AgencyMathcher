@@ -19,7 +19,8 @@ export default function Footer() {
         <Grid item
               sx={{
                   width: '100%',
-                  margin: '0 auto',
+                  m: '0 auto',
+                  p: '10px',
                   backgroundColor: 'white',
               }}
         >
@@ -29,12 +30,14 @@ export default function Footer() {
                 alignItems={"center"}
                 alignContent={"center"}
 
+
                 sx={{
                     maxWidth: maxWidth,
                     minHeight: 60,
                     p: '0 20px',
-                    flexDirection: {xs: 'column-reverse', sm: 'row'},
-                    m:'0 auto',
+                    flexDirection: {xs: 'column', sm: 'row'},
+                    order: 1,
+                    m: '0 auto',
 
                 }}
             >
@@ -43,11 +46,13 @@ export default function Footer() {
                 </Box>
 
                 <Stack
+
                     sx={{
                         justifyContent: "space-around",
                         flexDirection: {sm: 'column', md: 'row'},
+                        order: {xs: 3, sm: 2},
                         flexWrap: 'wrap',
-                        gap: {xs: '10px', md: '20px'}
+                        gap: {xs: '5px', md: '20px'}
                     }}
                 >
                     {footerLinks.map(item =>
@@ -65,6 +70,7 @@ export default function Footer() {
 
                 <Stack
                     direction={"row"}
+                    sx={{order: {xs: 2, sm: 3}}}
                 >
                     <CustomLink type={"link"} href={'https://www.linkedin.com/company/26265335/'}>
                         <LinkedInIcon sx={{fontSize: '40px'}}/>

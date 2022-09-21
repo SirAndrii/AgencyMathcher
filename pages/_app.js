@@ -1,7 +1,7 @@
 import Layout from "../components/layout/Layout";
 import Header from "../components/layout/Header";
 import "../styles/globals.css";
-import {ThemeProvider} from "@mui/material";
+import {Box, ThemeProvider} from "@mui/material";
 import lightTheme from "../styles/theme/aclippTheme";
 
 import createEmotionCache from "../styles/theme/createEmotionCache";
@@ -20,7 +20,9 @@ export default function MyApp({
             <ThemeProvider theme={lightTheme}>
                 <Layout>
                     <Header/>
-                    <Component {...pageProps}/>
+
+                        <Component  {...pageProps}/>
+
                     <Footer/>
                 </Layout>
             </ThemeProvider>

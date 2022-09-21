@@ -7,28 +7,45 @@ export async function getFilteredData(filter) {
 
     const data = await db.collection('agency').get();
     let agency = data.docs.map(doc => doc.data());
+    //add matching field with default value 50
+    agency.forEach(a => { a.match = defaultMatch; console.log(a) })
 
-    dataJson.quiz.forEach(qObj => {
-        agency = filtering(agency, filter, qObj)
-
+    dataJson.forEach(qObj => {
+        agency = matched(agency, filter, qObj)
     });
 
+    agency.sort((a,b) => b.match - a.match);
+    agency.length = 3;
+
+    // dataJson.forEach(qObj => {
+    //     agency = filtering(agency, filter, qObj)
+    //
+    // });
+
+    //agency= agency.map(a => ({name: a.name, match: a.match}))
     return agency;
 }
+
+//////
+const defaultMatch = 50;
+const step = Math.round((100 - defaultMatch) / dataJson.length);
 
 export default async (req, res) => {
     const filter = req.query;
 
-    console.log({req_query: filter})
+   // console.log({req_query: filter})
 
     //1 we can do filter on backend part, so not extra quering needed
     // let data = await db.collection('agency').where('industry', 'array-contains',filter.industry).get();
     const data = await db.collection('agency').get();
     let agency = data.docs.map(doc => doc.data());
+
+
+
     //iterate each question
-    dataJson.quiz.forEach(qObj => {
+    dataJson.forEach(qObj => {
         agency = filtering(agency, filter, qObj)
-        console.log({agency})
+
     });
 
     //if sort by active aclipp clients (subscription plan) and limit it to only 3 results
@@ -37,24 +54,58 @@ export default async (req, res) => {
 
 }
 
-
-function filtering(data, filter, {multiple, key,active}) {
+function filtering(agency, filter, {multiple, key, active}) {
     // multiple=true - we expect that in database will be an array
-    let filtered;
-    console.log(key,filter)
-if (active===false) {return data;}
+
+    let filtered = [];
+
+  //  console.log(key, filter)
+    if (active === false) {
+        return agency;
+    }
     // array in DB should include all checked items from the question with [key]
     if (multiple && Array.isArray(filter[key])) {
-        filtered = data.filter(item => filter[key].every(el => item[key].includes(el)))
+        filtered = agency.filter(item => filter[key].every(el => item[key].includes(el)))
     } else {
         //array or string includes string. it's not equal compare, so side effect can be.
 
-        filtered = data.filter(item => {
-            console.log(item[key],filter[key])
-            return item[key].includes(filter[key])})
+        filtered = agency.filter(item => {
+           //console.log(item[key], filter[key])
+            return item[key].includes(filter[key])
+        })
     }
 
-    return filtered.length ? filtered : data;
+    return filtered.length ? filtered : agency;
+}
+
+function matched (agency, filter, {multiple, key,active}){
+
+    if (active === false) {
+        return agency;
+    }
+// algorythm with sorting add match if
+
+if (multiple && Array.isArray(filter[key])) {
+    agency.forEach( ag =>{
+        const isMatched = ag[key] && filter[key].every(el =>ag[key].includes(el))
+
+        if (isMatched) {
+            ag.match += step;
+        }
+    } )
+} else {
+    //array or string includes string. it's not equal compare, so side effect can be.
+   agency.forEach(ag => {
+
+        const isMatched =  ag[key].includes(filter[key])
+
+        if (isMatched) {
+            ag.match += step;
+        }
+    })
+}
+
+return agency;
 }
 
 //
