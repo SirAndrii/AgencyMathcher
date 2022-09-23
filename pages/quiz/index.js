@@ -2,21 +2,24 @@ import React, {useEffect, useRef, useState} from 'react'
 import dataJson from '../../constants/quiz.json'
 import useGenerator from "../../components/useGenerateForm";
 import {Button, Grid, LinearProgress} from "@mui/material";
-import {CSSTransition, SwitchTransition} from "react-transition-group";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {useRouter} from "next/router";
 
 export default function Quiz() {
     const [activeTab, setActiveTab] = useState(0);
     const [filter, setFilter] = useState({})
     const [valid, setValid] = useState(false)
+
     const ref = useRef(true); //for sliding direction
     const router = useRouter();
+
 
     console.log({filter})
     const handleClickNext = () => {
         ref.current = true;
 
         if (activeTab === tabs.length - 1) {
+
             //change boolean objects to arrays. multiselect returns array, checked - object
             for (const key in filter) {
                 if (!Array.isArray(filter[key]) && typeof filter[key] === 'object') {
@@ -24,7 +27,6 @@ export default function Quiz() {
                 }
                 //if array contains only one element convert it to string (because multi select returns string in case of one selection)
                 if (filter[key].length === 1) {
-                    alert(filter[key])
                     filter[key] = filter[key][0];
                 }
             }
@@ -32,15 +34,17 @@ export default function Quiz() {
             router.push({
                 pathname: '/matched',
                 query: {filter: JSON.stringify(filter)}
-          //  }, '/matched')
-        })
+                //  }, '/matched')
+
+            })
+
 
         } else {
             setActiveTab(activeTab + 1)
         }
     }
 
-    const handleClickPrev = () =>{
+    const handleClickPrev = () => {
         if (activeTab !== 0) {
             ref.current = false;
 
@@ -75,12 +79,12 @@ export default function Quiz() {
         }
     }, [filter, activeTab])
 
-
     const tabs = useGenerator(dataJson, {handleChange, filter})
 
     return (
         <Grid
             container
+            justifyContent={'center'}
         >
             <Grid item xs={12}>
                 <LinearProgress
@@ -88,11 +92,16 @@ export default function Quiz() {
                     variant="determinate"
                     value={(activeTab + 1) * 100 / tabs.length}/>
             </Grid>
-            <SwitchTransition>
+
+            <TransitionGroup childFactory={(child) =>
+                React.cloneElement(
+                    child, {classNames: ref.current ? "right" : "left", timeout: 1000}
+                )}
+            >
                 <CSSTransition
                     key={activeTab}
-                    addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
-                    classNames={ ref.current ? 'right': 'left'}
+                    //addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
+                    //classNames={ref.current ? "right" : "left"}
                 >
                     <Grid
                         container
@@ -121,7 +130,7 @@ export default function Quiz() {
                                     width: '100px',
                                     borderRadius: '50px',
                                 }}
-                                onClick={(e) => handleClickPrev(activeTab,e)}
+                                onClick={(e) => handleClickPrev(activeTab, e)}
                             >
                                 {activeTab === 0 ? 'cancel' : 'previous'}
                             </Button>
@@ -134,14 +143,14 @@ export default function Quiz() {
                                     padding: '10px 20px',
                                     width: '100px',
                                 }}
-                                onClick={(e) => handleClickNext(activeTab,e)}
+                                onClick={(e) => handleClickNext(activeTab, e)}
                             >
                                 {activeTab !== (tabs.length - 1) ? 'next' : 'finish'}
                             </Button>
                         </Grid>
                     </Grid>
                 </CSSTransition>
-            </SwitchTransition>
+            </TransitionGroup>
         </Grid>
     )
 }

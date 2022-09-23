@@ -104,8 +104,9 @@ export default function useGenerator(data, props) {
                                 onChange={props.handleChange(key)}
                                 multiple={multiple}
                                 value={ selectValue }
-                                input={<OutlinedInput label="Tag"/>}
+                                input={<OutlinedInput label="Select"/>}
                                 renderValue={(selected) =>  multiple ? selected.join(', ') : selected}
+                                sx={{maxWidth:'320px',textOverflow:'ellipsis'}}
                                 // MenuProps={MenuProps}
                             >
                                 {optionArr.map( opt =>

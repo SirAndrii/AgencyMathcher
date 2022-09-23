@@ -6,6 +6,8 @@ body {
     min-height: 100vh;
 }
 
+
+/* fade-in-out for quiz*/
 .right-enter {
     opacity: 0;
     transform: translateX(100%);

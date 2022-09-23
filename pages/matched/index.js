@@ -5,14 +5,15 @@ import {getFilteredData} from "../api/filterAgency";
 import Button from "@mui/material/Button";
 import {useState} from "react";
 import DialogInfo from "../../components/matched/DialogInfo";
+import DialogContact from "../../components/contact/DialogContact";
 
 export default function AgencyMatch(props) {
     const [selectedAgency, setSelectedAgency] = useState(null);
-    const [openDialog, setOpenDialog] = useState(false);
+    const [openInfo, setOpenInfo] = useState(false);
 
     return (
         <>
-            <DialogInfo {...{openDialog, setOpenDialog, selectedAgency}}/>
+            <DialogInfo {...{openInfo, setOpenInfo, selectedAgency}}/>
             <Stack sx={{
                 pt: '60px',
             }}>
@@ -39,7 +40,11 @@ export default function AgencyMatch(props) {
                                 borderRadius: '5px',
                                 border: '1px solid lightgrey',
                             }}>
-                                <Avatar src={el.logo} style={{width: '90px', height: '90px'}} variant="square"/>
+                                <Avatar
+                                    children={el.name.split(' ')[0]}
+                                    alt={el.name}
+                                    src={el.logo}
+                                    style={{width: '90px', height: '90px'}} variant="square"/>
                             </Box>
 
                             <Stack sx={{width:'100%'}}>
@@ -51,12 +56,13 @@ export default function AgencyMatch(props) {
                                 >
                                     <Stack direction={"row"}>
                                         <Typography variant={"h4"}>{el.name}</Typography>
+
                                         <Button
                                             color={'secondary'}
                                             variant={'outlined'}
                                             onClick={() => {
                                                 setSelectedAgency(el);
-                                                setOpenDialog(true)
+                                                setOpenInfo(true)
                                             }}
                                             sx={{
                                                 ml: '10px',
@@ -77,15 +83,7 @@ export default function AgencyMatch(props) {
                                         minWidth: '170px'
                                     }}>
 
-                                        <CustomLink
-                                            href={"#"}
-                                            type={'button'}
-                                            variant={'contained'}
-                                            color={'secondary'}
-                                            sx={{height: '24px'}}
-                                        >
-                                            Contact
-                                        </CustomLink>
+                                        <DialogContact agency={el.name}/>
 
                                     </Box>
                                 </Stack>
@@ -142,7 +140,7 @@ export default function AgencyMatch(props) {
                             variant={'outlined'}
                             onClick={() => {
                                 setSelectedAgency(el);
-                                setOpenDialog(true)
+                                setOpenInfo(true)
                             }}
                             sx={{
                                 width: '100%',

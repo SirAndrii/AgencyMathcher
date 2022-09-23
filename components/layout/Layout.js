@@ -11,7 +11,7 @@ export default function Layout(props) {
               sx={{
                   textAlign: "center",
                   minHeight: "100vh",
-                  backgroundImage: 'radial-gradient(ellipse at top, rgba(230, 31, 92, 0.1), transparent 80%)'
+                  backgroundImage: 'radial-gradient(100% 50vh ellipse at top, rgba(230, 31, 92, 0.1), transparent 80%)'
               }}>
             {props.children}
         </Grid>

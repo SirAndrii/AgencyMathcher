@@ -28,7 +28,7 @@ export async function getFilteredData(filter) {
 
 //////
 const defaultMatch = 50;
-const step = Math.round((100 - defaultMatch) / dataJson.length);
+const step = Math.round((100 - defaultMatch) / dataJson.filter(e=> e.active!==false ).length);
 
 export default async (req, res) => {
     const filter = req.query;

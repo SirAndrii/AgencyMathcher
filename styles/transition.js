@@ -3,22 +3,22 @@ import {keyframes} from "@emotion/react";
 
 const slidesRight = keyframes`
   from {
-    transform: translateX(-10%);
+    transform: translateX(-100%);
     opacity: 0;
   }
   to {
-    transform: translateX(0px);
+    transform: translateX(0);
     opacity: 1;
   }
 `
 
 const slidesLeft = keyframes`
   from {
-    transform: translateX(10%);
+    transform: translateX(100%);
     opacity: 0;
   }
   to {
-    transform: translateX(0px);
+    transform: translateX(0);
     opacity: 1;
   }
 `

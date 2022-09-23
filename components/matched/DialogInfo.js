@@ -8,35 +8,36 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import Grid from "@mui/system/Unstable_Grid";
 import {maxWidth} from "../../styles/theme/aclippTheme";
-import {Avatar} from "@mui/material";
-import CustomLink from "../CustomLink";
+import {Avatar, Stack} from "@mui/material";
+import DialogContact from "../contact/DialogContact";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function DialogInfo(props) {
-    const {selectedAgency, openDialog, setOpenDialog} = props;
+    const {selectedAgency, openInfo, setOpenInfo} = props;
 
     const handleClickOpen = () => {
-        setOpenDialog(true);
+        setOpenInfo(true);
     };
 
     const handleClose = () => {
-        setOpenDialog(false);
+        setOpenInfo(false);
     };
 
     if (!selectedAgency) return null;
+
     return (
         <div>
             <Dialog
                 fullScreen
-                open={openDialog}
+                open={openInfo}
                 onClose={handleClose}
                 TransitionComponent={Transition}
             >
                 <AppBar sx={{position: 'relative'}}>
-                    <Toolbar>
+                    <Toolbar sx={{justifyContent: 'space-between'}}>
                         <IconButton
                             edge="start"
                             color="inherit"
@@ -45,6 +46,8 @@ export default function DialogInfo(props) {
                         >
                             <CloseIcon/>
                         </IconButton>
+
+                        <Typography variant={'h4'}> More Info</Typography>
                     </Toolbar>
                 </AppBar>
 
@@ -55,10 +58,25 @@ export default function DialogInfo(props) {
                         maxWidth: maxWidth,
                         p: {xs: '10px', sm: '30px'}
                     }}>
-                    <Avatar src={selectedAgency.logo}/>
+                    <Stack direction={"row"} columnGap='20px' alignItems='center'>
+                        <Avatar
+                            children={selectedAgency.name.split(' ')[0]}
+                            src={selectedAgency.logo}
+                            sx={{mb: '20px'}}
+                        />
 
-                    <Typography variant={'h2'}>
-                        {selectedAgency.name}
+                        <Typography variant={'h2'}>
+                            {selectedAgency.name}
+                        </Typography>
+
+                    </Stack>
+                    <Typography paragraph>
+
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores cumque doloribus
+                        enim et excepturi hic ipsa laudantium magnam nam neque, nostrum perferendis porro quas qui
+                        reiciendis sapiente sint tempore.
+
+
                     </Typography>
 
                     <Typography paragraph>
@@ -70,15 +88,19 @@ export default function DialogInfo(props) {
 
                     </Typography>
 
-                    <CustomLink
-                        href={"#"}
-                        type={'button'}
-                        variant={'contained'}
-                        color={'secondary'}
-                        sx={{height: '24px'}}
-                    >
-                        Contact
-                    </CustomLink>
+                    <Typography paragraph>
+
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores cumque doloribus
+                        enim et excepturi hic ipsa laudantium magnam nam neque, nostrum perferendis porro quas qui
+                        reiciendis sapiente sint tempore.
+
+
+                    </Typography>
+
+
+
+
+                    <DialogContact agency={selectedAgency.name}/>
 
                 </Grid>
             </Dialog>
