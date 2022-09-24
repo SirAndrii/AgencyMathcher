@@ -1,10 +1,15 @@
 import {Grid, Paper} from "@mui/material";
 import {agency} from "../../constants/dummyData";
 import db from "../../firebaseAdmin";
+import Head from "next/head"
 
 export default function AllAgencies(props) {
 
     return (
+        <>
+        <Head>
+            <title>Best PR agencies in Germany</title>
+        </Head>
         <Grid
             container
             direction={"rows"}
@@ -26,6 +31,7 @@ export default function AllAgencies(props) {
                 </Grid>
             )}
         </Grid>
+        </>
     )
 }
 

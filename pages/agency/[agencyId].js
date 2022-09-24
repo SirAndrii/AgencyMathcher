@@ -1,17 +1,23 @@
 import Typography from "@mui/material/Typography";
 import {agency} from '../../constants/dummyData'
 import {Paper} from "@mui/material";
+import Head from 'next/head'
 
 export default function AgencyInfo({agencyData}) {
 
-
     return (
-        <Paper>
-            <Typography variant={'h1'}>This is agency: {agencyData.name} </Typography>
-            <Typography subtitle={2}>
-                {JSON.stringify(agencyData, null, 2)}
-            </Typography>
-        </Paper>
+        <>
+            <Head>
+                <title>{agencyData.name} ({agencyData.location})</title>
+            </Head>
+
+            <Paper>
+                <Typography variant={'h1'}>This is agency: {agencyData.name} </Typography>
+                <Typography subtitle={2}>
+                    {JSON.stringify(agencyData, null, 2)}
+                </Typography>
+            </Paper>
+        </>
     )
 }
 

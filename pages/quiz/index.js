@@ -38,7 +38,6 @@ export default function Quiz() {
 
             })
 
-
         } else {
             setActiveTab(activeTab + 1)
         }

@@ -25,12 +25,9 @@ export default function Footer() {
               }}
         >
             <Stack
-
                 justifyContent={"space-around"}
                 alignItems={"center"}
                 alignContent={"center"}
-
-
                 sx={{
                     maxWidth: maxWidth,
                     minHeight: 60,
@@ -46,7 +43,6 @@ export default function Footer() {
                 </Box>
 
                 <Stack
-
                     sx={{
                         justifyContent: "space-around",
                         flexDirection: {sm: 'column', md: 'row'},
@@ -64,7 +60,8 @@ export default function Footer() {
                                         textDecoration: 'none',
                                         '&:hover': {color: '#e61f5c'}
                                     }}
-                        >{item.label}</CustomLink>
+                        >{item.label}
+                        </CustomLink>
                     )}
                 </Stack>
 

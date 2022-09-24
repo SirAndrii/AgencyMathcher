@@ -1,12 +1,9 @@
 import {useState} from 'react'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
 
-import {Close, Menu} from '@mui/icons-material';
-
-import {Grid} from "@mui/material";
-import IconButton from "@mui/material/IconButton";
+import {Grid, IconButton, List, ListItem} from '@mui/material'
 import Drawer from "@mui/material/Drawer";
+import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import {routes} from '../../constants/routes'
 import CustomLink from "../CustomLink";
@@ -27,7 +24,7 @@ const Navbar = () => {
     */
 
     const navList = navItems.map((item) =>
-        <ListItem key={item.label} sx={{width:'auto'}}>
+        <ListItem key={item.label} sx={{width: 'auto'}}>
             <CustomLink
                 type={'link'}
                 href={item.route}
@@ -63,13 +60,15 @@ const Navbar = () => {
                 <LogoIcon height='30px' color={palette.primary.main}/>
             </CustomLink>
 
-            <List sx={{
-                display: {xs: 'none', md: 'flex'},
-                alignItems: 'center',
-                '& .MuiListItem-root': {
-                    fontSize: '20px'
-                }
-            }}>
+            <List
+                sx={{
+                    display: {xs: 'none', md: 'flex'},
+                    alignItems: 'center',
+                    '& .MuiListItem-root': {
+                        fontSize: '20px'
+                    }
+                }}
+            >
                 {navList}
             </List>
 
@@ -81,8 +80,9 @@ const Navbar = () => {
                 sx={{
                     display: {xs: 'none', md: 'block'},
                     height: '30px',
-                    lineHeight:'18px'
-                }}>
+                    lineHeight: '18px'
+                }}
+            >
                 For Agency
             </CustomLink>
 
@@ -91,12 +91,12 @@ const Navbar = () => {
                             display: {md: 'none'},
                         }}
             >
-                {isSidebarOpen ? <Close color='primary'/> : <Menu color='primary'/>}
+                {isSidebarOpen ? <CloseIcon color='primary'/> : <MenuIcon color='primary'/>}
             </IconButton>
 
             <Drawer anchor='right' open={isSidebarOpen}
                     sx={{
-                        zIndex:1000,
+                        zIndex: 1000,
                         mt: {xs: '60px', md: '60px'},
                         '& .MuiBackdrop-root, & .MuiModal-root, & .MuiPaper-root': {mt: {xs: '60px', md: '60px'}},
                         '& .MuiPaper-root': {
