@@ -1,71 +1,43 @@
-import {useEffect, useRef, useState} from "react";
+import {useState} from "react";
 import {Button, CircularProgress, Grid, TextField} from "@mui/material";
 import {MuiTelInput} from "mui-tel-input";
 import SendIcon from '@mui/icons-material/Send';
 import axios from "axios";
-
-const initErrorState = {
-    name: {
-        state: false,
-        helper: " "
-    },
-    company: {
-        state: false,
-        helper: " "
-    },
-    email: {
-        state: false,
-        helper: " "
-    },
-    phone: {
-        state: false,
-        helper: " "
-    },
-}
+import useContactValue, {validateForm} from "./useContactValue";
 
 
-export default function ContactForm({setOpenContact, setSnack,setOpenInfo}) {
+export default function ContactForm({setOpenContact, setSnack, setOpenInfo}) {
     //setOpenInfo(false);
 
-    const {useRef} = require("react");
+    //const {name, company, email, message } = useContactValue();
+    const {nameRef, emailRef, messageRef, companyRef} = useContactValue();
+    const {phone, setPhone, error, setError} = useContactValue();
 
-    const nameRef = useRef(null);
-    const emailRef = useRef(null);
-    const messageRef = useRef(null);
-    const companyRef = useRef(null);
-
-    const [phone, setPhone] = useState("");
-
-    const [error, setError] = useState(initErrorState);
-
+    const [performing, setPerforming] = useState(false)
 
 //alert(error)
     const handleSubmit = (event) => {
         event.preventDefault()
+        const name = nameRef?.current?.value
+        const company = companyRef?.current?.value
+        const email = emailRef?.current?.value
+        const message = messageRef?.current?.value
 
-        const newError = validate(
-            nameRef.current.value,
-            companyRef.current.value,
-            emailRef.current.value,
-            phone)
+        const newError = validateForm(name, company, email, phone)
 
         if (Object.values(newError).some(el => el.state)) {
-            setError(prev=>({...newError}))
+            setError(prev => ({...newError}))
             return null;
         }
 
-        const data = {
-            name: nameRef?.current?.value,
-            company: companyRef?.current?.value,
-            email: emailRef?.current?.value,
-            message: messageRef?.current?.value,
-            phone
-        }
+        setPerforming(true)
 
-        axios.post('/api/postContactData', data).then(
+        const dataPost = {name, company, email, message, phone}
+
+        axios.post('/api/postContactData', dataPost).then(
             (res) => {
                 if (res.status === 200) {
-                    alert (JSON.stringify(res.data))
+                    console.log(JSON.stringify(res.data))
                     setSnack({
                         open: true,
                         status: res.status,
@@ -73,25 +45,22 @@ export default function ContactForm({setOpenContact, setSnack,setOpenInfo}) {
                     });
                     setOpenContact(false)
 
-                }else{
+                } else {
                     setSnack({
                         open: true,
                         status: res.status,
                         message: 'error'
                     });
+
+                    setPerforming(false)
                 }
             }
         )
     }
 
 
-
-    const [, setErrorMessage] = useState('');
-    const [performing, isPerforming] = useState(false)
-
-
     const handleBlur = prop => event => {
-        // setError({...error, [prop]: !agency.validate(prop)})
+        // setError({...error, [prop]: validate(prop)})
     };
 
 
@@ -197,16 +166,18 @@ export default function ContactForm({setOpenContact, setSnack,setOpenInfo}) {
                         multiline
                         rows={4}
                         variant={"outlined"}
+                        inputRef={messageRef}
                         sx={{
-                            mb:'30px' +
-                                ''}}
+                            mb: '30px' +
+                                ''
+                        }}
                     />
                 </Grid>
 
 
                 <Grid item>
                     <Button
-                        // key={'button-' + agency.validate()}
+                        aria-label={'send request'}
                         variant="contained"
                         color="secondary"
                         fullWidth
@@ -216,7 +187,6 @@ export default function ContactForm({setOpenContact, setSnack,setOpenInfo}) {
                         }
                         onClick={handleSubmit}
                         type='submit'
-                        // disabled={!agency.validate() || performing}
                     >
                         Send request
                     </Button>
@@ -228,75 +198,3 @@ export default function ContactForm({setOpenContact, setSnack,setOpenInfo}) {
     )
 }
 
-
-
-function validate(name, company, email, phone) {
-
-    const error = {...initErrorState}
-
-    const nameRegex = /[\p{L}\d\s'-]{2,50}/gu;
-    const companyRegex = /[\p{L}\d\s'-]{3,50}/gu;
-    const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/g;
-
-
-    if (!(nameRegex.test(name))) {
-        error.name = {
-            state: true,
-            helper: 'Name must be 3-50 letters'
-        }
-    }
-
-    if ( !(companyRegex.test(company)) ) {
-        console.log(company,nameRegex.test(company))
-        error.company = {
-            state: true,
-            helper: 'Company\'s name must be 3-50 letters'
-        }
-    }
-
-    if (!emailRegex.test(email)) {
-        error.email = {
-            state: true,
-            helper: 'Correct your email'
-        }
-    }
-    if (phone.length < 9) {
-        error.phone = {
-            state: true,
-            helper: 'Your phone number is to short'
-        }
-    }
-
-
-    // if (!emailRegex.test(emailRef.current.value) && phone.length < 6) {
-    //     Object.assign(error,
-    //         {
-    //             email: {
-    //                 state: true,
-    //                 helper: 'Fill at least email or phone'
-    //             },
-    //             phone: {
-    //                 state: true,
-    //                 helper: 'Fill at least email or phone'
-    //             },
-    //         });
-    // } else {
-
-
-    // if (name.length < 3 && company.length < 3) {
-    //     Object.assign(error,
-    //         {
-    //             name: {
-    //                 state: true,
-    //                 helper: 'Name shouldn\'t be empty'
-    //             },
-    //             company: {
-    //                 state: true,
-    //                 helper: 'Company\'s name shouldn\'t be empty'
-    //             }
-    //         }
-    //     );
-    // }
-
-    return error;
-}

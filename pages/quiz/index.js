@@ -4,6 +4,7 @@ import useGenerator from "../../components/useGenerateForm";
 import {Button, Grid, LinearProgress} from "@mui/material";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {useRouter} from "next/router";
+import Head from 'next/head'
 
 export default function Quiz() {
     const [activeTab, setActiveTab] = useState(0);
@@ -35,7 +36,6 @@ export default function Quiz() {
                 pathname: '/matched',
                 query: {filter: JSON.stringify(filter)}
                 //  }, '/matched')
-
             })
 
         } else {
@@ -85,6 +85,11 @@ export default function Quiz() {
             container
             justifyContent={'center'}
         >
+            <Head>
+                <title>Best agency matcher</title>
+                <meta name="robots" content="noindex" />
+            </Head>
+
             <Grid item xs={12}>
                 <LinearProgress
                     // className={classes.bar}
@@ -97,11 +102,7 @@ export default function Quiz() {
                     child, {classNames: ref.current ? "right" : "left", timeout: 1000}
                 )}
             >
-                <CSSTransition
-                    key={activeTab}
-                    //addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
-                    //classNames={ref.current ? "right" : "left"}
-                >
+                <CSSTransition key={activeTab}>
                     <Grid
                         container
                         direction={'column'}
@@ -114,6 +115,7 @@ export default function Quiz() {
                     >
 
                         {tabs[activeTab]}
+
 
                         <Grid
                             container

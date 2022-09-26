@@ -3,24 +3,7 @@ import Welcome from "../components/home/Wellcome";
 import WhoWeAre from "../components/home/WhoWeAre";
 import HowItWorks from "../components/home/HowItWorks";
 import CopyTextBlock from "../components/home/CopyTextBlock";
-
-const style = {
-
-    paper: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        margin: 40,
-        padding: 20,
-        textAlign: 'center',
-        backgroundColor: 'lightgrey',
-        minHeight: '50vh',
-        maxWidth: 1000
-    }
-
-
-}
+import Head from 'next/head'
 
 export default function Home() {
     return (
@@ -29,7 +12,9 @@ export default function Home() {
               alignContent={'center'}
               alignItems={'center'}
         >
-
+            <Head>
+                <title>Best PR agency finder for your business!</title>
+            </Head>
 
             <Welcome/>
 
@@ -37,11 +22,8 @@ export default function Home() {
 
             <CopyTextBlock/>
 
-
             <WhoWeAre/>
 
-
         </Grid>
-
     );
 }

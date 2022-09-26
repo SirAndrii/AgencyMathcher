@@ -10,7 +10,7 @@ body {
 /* fade-in-out for quiz*/
 .right-enter {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(20%);
 }
 .right-enter-active {
     opacity: 1;
@@ -22,12 +22,12 @@ body {
 }
 .right-exit-active {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(-20%);
 }
 
 .left-enter {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(-20%);
 }
 .left-enter-active {
     opacity: 1;
@@ -39,7 +39,7 @@ body {
 }
 .left-exit-active {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(20%);
 }
 .left-enter-active ,
 .left-exit-active,
@@ -47,5 +47,3 @@ body {
 .right-exit-active {
     transition: opacity 500ms, transform 500ms;
 }
-
-

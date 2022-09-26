@@ -25,44 +25,12 @@ const slidesLeft = keyframes`
 
 export const transition = {
         'right': {
-            // entering: {
-            //     opacity: 0,
-            //     transform: 'translateX(-10%)',
-            // },
-            // entered: {
-            //     opacity: 1,
-            //     transform: 'translateX(0)'
-            // },
-            // exiting: {
-            //     opacity: 0,
-            //     transform: 'translateX(-10%)'
-            // },
-            // exited: {
-            //     opacity: 1,
-            //     transform: 'translateX(0%)'
-            // },
             slideIn: {
                 animation: `${slidesRight} 1s ease-in-out`
             }
         },
 
         'left': {
-            // entering: {
-            //     opacity: 0,
-            //     transform: 'translateX(10%)',
-            // },
-            // entered: {
-            //     opacity: 1,
-            //     transform: 'translateX(0)'
-            // },
-            // exiting: {
-            //     opacity: 0,
-            //     transform: 'translateX(10%)'
-            // },
-            // exited: {
-            //     opacity: 1,
-            //     transform: 'translateX(0)'
-            // },
             slideIn: {
                 animation: `${slidesLeft} 1s ease-in-out`
             }
