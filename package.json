@@ -2,10 +2,15 @@
   "name": "agency_matcher",
   "version": "0.1",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "dev": "next -p 3001",
     "build": "next build",
-    "start": "next start -p 3001"
+    "start": "next start -p 3001",
+    "serve": "npm run build && firebase emulators:start --only functions,hosting",
+    "shell": "npm run build && firebase functions:shell",
+    "deploy": "firebase deploy --only functions,hosting",
+    "logs": "firebase functions:log"
   },
   "dependencies": {
     "@emotion/cache": "^11.10.3",
@@ -25,6 +30,7 @@
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
+    "firebase-functions": "^3.24.0",
     "line-reader": "^0.4.0",
     "mui-tel-input": "^2.0.2"
   }
